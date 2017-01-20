@@ -49,4 +49,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SDK Camera" />
+
+
+    <Button
+        android:id="@+id/btnView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test View" />
+
+
+    <Button
+        android:id="@+id/btnProperty"
+        android:text="Property Animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>

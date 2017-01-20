@@ -28,7 +28,11 @@
         <activity android:name=".videoRecord.MediaRecord2Activity" />
         <activity android:name=".schoolRecord.SchoolCameraActivity" />
         <activity android:name=".schoolRecord.SchoolRecordActivity" />
-        <activity android:name=".SDKCamera.CameraActivity"></activity>
+        <activity android:name=".SDKCamera.CameraActivity" />
+        <activity android:name=".view.ViewActivity" />
+        <activity android:name=".PropertyAnimation.PropertyActivity" />
+        <activity android:name=".PropertyAnimation.PropertyMixActivity" />
+        <activity android:name=".PropertyAnimation.BasePropertyActivity"></activity>
     </application>
 
 </manifest>

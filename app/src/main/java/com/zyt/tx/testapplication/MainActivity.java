@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.zyt.tx.testapplication.PropertyAnimation.BasePropertyActivity;
+import com.zyt.tx.testapplication.PropertyAnimation.PropertyActivity;
 import com.zyt.tx.testapplication.SDKCamera.CameraActivity;
 import com.zyt.tx.testapplication.schoolRecord.SchoolCameraActivity;
 import com.zyt.tx.testapplication.schoolRecord.SchoolRecordActivity;
 import com.zyt.tx.testapplication.videoRecord.MediaRecord2Activity;
+import com.zyt.tx.testapplication.view.ViewActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -23,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick({R.id.btn_mediaplayer, R.id.btn_testRunnable, R.id.btnMediaPlayer
-            , R.id.btnSchoolCamera, R.id.btnSchoolRecord, R.id.btnSDKCamera})
+            , R.id.btnSchoolCamera, R.id.btnSchoolRecord, R.id.btnSDKCamera, R.id.btnView
+            , R.id.btnProperty})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_mediaplayer:
@@ -48,6 +52,14 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.btnSDKCamera:
                 startActivity(new Intent(this, CameraActivity.class));
+                break;
+
+            case R.id.btnView:
+                startActivity(new Intent(this, ViewActivity.class));
+                break;
+
+            case R.id.btnProperty:
+                startActivity(new Intent(this, BasePropertyActivity.class));
                 break;
         }
     }

@@ -2,6 +2,7 @@ package com.zyt.tx.testapplication.SDKCamera;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.graphics.Point;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
@@ -16,12 +17,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zyt.tx.testapplication.R;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,6 +29,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -48,11 +49,15 @@ public class CameraActivity extends AppCompatActivity {
     TextView tvTime;
     @BindView(R.id.tvRoom)
     TextView tvRoom;
-
+    @BindView(R.id.seekBar)
+    SeekBar seekBar;
 
     private Camera mCamera;
     private CameraView mCameraView;
+    //    private CameraZoomView mCameraView;
     private MediaRecorder mMediaRecorder;
+
+    private boolean isCameraOpen = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,16 +89,51 @@ public class CameraActivity extends AppCompatActivity {
     private void work() {
         mCamera = getCameraInstance();
         mCameraView = new CameraView(this, mCamera);
+//        mCameraView = new CameraZoomView(this, mCasmera);
         FrameLayout container = (FrameLayout) findViewById(R.id.container);
         container.addView(mCameraView);
+
+        initSeekBar();
     }
 
+    private void initSeekBar() {
+        Camera.Parameters parameters = mCamera.getParameters();
+        if (!parameters.isZoomSupported()) {
+            return;
+        }
+        seekBar.setMax(parameters.getMaxZoom());
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (mCamera != null) {
+                    Camera.Parameters p = mCamera.getParameters();
+                    if (p.isZoomSupported()) {
+                        p.setZoom(progress);
+                        mCamera.setParameters(p);
+                    }
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+    }
+
+
     @Override
-    protected void onStart() {
-        super.onStart();
-        //恢复预览
-
-
+    protected void onResume() {
+        super.onResume();
+        if (!isCameraOpen && mCamera == null) {
+            mCamera = getCameraInstance();
+//            mCameraView.preView(mCamera);
+        }
     }
 
     @Override
@@ -113,11 +153,38 @@ public class CameraActivity extends AppCompatActivity {
         Camera c = null;
         try {
             c = Camera.open();
+            c.setDisplayOrientation(90);
+            //调整画面比例
+            Camera.Parameters parameters = c.getParameters();
+            if (parameters.isZoomSupported()) {
+                parameters.setZoom(-1);
+                c.setParameters(parameters);
+                //seekBar控制
+            }
+
+            isCameraOpen = true;
         } catch (Exception e) {
             //不存在或者正在使用中会抛异常  is not available.
             e.printStackTrace();
         }
         return c;
+    }
+
+
+    private Point getBestCameraResolution(Camera.Parameters parameters, Point screenResolution) {
+        float tmp = 0f;
+        float mindiff = 100f;
+        float x_d_y = (float) screenResolution.x / (float) screenResolution.y;
+        Camera.Size best = null;
+        List<Camera.Size> supportedPreviewSizes = parameters.getSupportedPreviewSizes();
+        for (Camera.Size s : supportedPreviewSizes) {
+            tmp = Math.abs(((float) s.height / (float) s.width) - x_d_y);
+            if (tmp < mindiff) {
+                mindiff = tmp;
+                best = s;
+            }
+        }
+        return new Point(best.width, best.height);
     }
 
     @OnClick({R.id.btnCapturePic, R.id.btnCaptureVideo})
@@ -141,14 +208,15 @@ public class CameraActivity extends AppCompatActivity {
     private int curSeconds = 0;
 
     Runnable updateRuannable = new Runnable() {
-        @Override@TargetApi(18)
+        @Override
+        @TargetApi(18)
         public void run() {
             //如果在录制中，就没隔一段时间设置一次。
             tvTime.setText(String.format(Locale.CHINESE, "录制：%s秒", ++curSeconds));
 
             String available = PhoneInfoUtils.getSDCardAvailableSize(getApplicationContext());
             String totalSize = PhoneInfoUtils.getSDCardTotalSize(getApplicationContext());
-            tvRoom.setText(String.format(Locale.CHINESE,"可用容量/总容量:%s/%s",available,totalSize));
+            tvRoom.setText(String.format(Locale.CHINESE, "可用容量/总容量:%s/%s", available, totalSize));
             if (isRecording) {
                 mHandler.postDelayed(this, 1000);
             }
@@ -180,7 +248,8 @@ public class CameraActivity extends AppCompatActivity {
     private boolean prepareVideoRecord() {
         mMediaRecorder = new MediaRecorder();
         mCamera = getCameraInstance();
-        mCamera.setDisplayOrientation(90);
+        //对camera进行设置
+
         mCamera.unlock();
         mMediaRecorder.setCamera(mCamera);
 
@@ -222,9 +291,9 @@ public class CameraActivity extends AppCompatActivity {
         if (mCamera != null) {
             mCamera.release();
             mCamera = null;
+            isCameraOpen = false;
         }
     }
-
 
     private Camera.PictureCallback mPicture = new Camera.PictureCallback() {
         @Override
@@ -260,7 +329,6 @@ public class CameraActivity extends AppCompatActivity {
 
     @Nullable
     private static File getOutputMediaFile(int type) {
-
         //getExternalStoragePublicDirectory在删除app后文件不会被删除。
         File mediaStoreDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
                 , "TaxiCameraApp");

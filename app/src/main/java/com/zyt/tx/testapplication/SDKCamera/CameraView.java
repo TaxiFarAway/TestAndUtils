@@ -28,10 +28,6 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         try {
-//            if (mHolder != null) {
-//                mCamera.setPreviewDisplay(mHolder);
-//                mCamera.startPreview();
-//            }
             mCamera.setPreviewDisplay(holder);
             mCamera.startPreview();
         } catch (IOException e) {
@@ -64,5 +60,26 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
 
+    }
+
+
+    public void preView(Camera mCamera) {
+        if (mHolder == null) {
+            return;
+        }
+
+        try {
+            mCamera.stopPreview();
+        } catch (Exception e) {
+            e.printStackTrace();
+            //视图停止不存在的预览
+        }
+
+        try {
+            mCamera.setPreviewDisplay(mHolder);
+            mCamera.startPreview();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
