@@ -22,7 +22,7 @@ public class PathUtils {
         if (TextUtils.isEmpty(rootPath)) {
             return "";
         }
-        StringBuffer sb = new StringBuffer();
+        StringBuffer sb = new StringBuffer(rootPath);
         sb.append("/data/");
         sb.append(info).append("/");
         String filePath = sb.toString();

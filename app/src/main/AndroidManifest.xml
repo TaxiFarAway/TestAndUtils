@@ -33,7 +33,10 @@
         <activity android:name=".PropertyAnimation.PropertyActivity" />
         <activity android:name=".PropertyAnimation.PropertyMixActivity" />
         <activity android:name=".PropertyAnimation.BasePropertyActivity" />
-        <activity android:name=".file.FileTestActivity"></activity>
+        <activity android:name=".file.FileTestActivity" />
+        <activity android:name=".uploadBigFile.UploadBigFileActivity" />
+        <activity android:name=".uploadBigFile.ChooseFileActivity" />
+        <activity android:name=".uploadBigFile.ChooseFolderActivity"></activity>
     </application>
 
 </manifest>
