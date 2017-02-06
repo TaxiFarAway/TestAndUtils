@@ -28,7 +28,6 @@ public class PropertyMixActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_property_mix);
 
         imageView = (ImageView) findViewById(R.id.ivContent);
-
         findViewById(R.id.btnVerticalRun).setOnClickListener(this);
         findViewById(R.id.btnPaowuxian).setOnClickListener(this);
 

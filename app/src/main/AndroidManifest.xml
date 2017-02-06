@@ -32,7 +32,8 @@
         <activity android:name=".view.ViewActivity" />
         <activity android:name=".PropertyAnimation.PropertyActivity" />
         <activity android:name=".PropertyAnimation.PropertyMixActivity" />
-        <activity android:name=".PropertyAnimation.BasePropertyActivity"></activity>
+        <activity android:name=".PropertyAnimation.BasePropertyActivity" />
+        <activity android:name=".file.FileTestActivity"></activity>
     </application>
 
 </manifest>

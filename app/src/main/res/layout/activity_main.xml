@@ -60,7 +60,13 @@
 
     <Button
         android:id="@+id/btnProperty"
-        android:text="Property Animation"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Property Animation" />
+
+    <Button
+        android:id="@+id/bntFileTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="File_Test" />
 </LinearLayout>

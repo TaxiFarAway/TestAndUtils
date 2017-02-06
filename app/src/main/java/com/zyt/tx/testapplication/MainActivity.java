@@ -8,6 +8,7 @@ import android.view.View;
 import com.zyt.tx.testapplication.PropertyAnimation.BasePropertyActivity;
 import com.zyt.tx.testapplication.PropertyAnimation.PropertyActivity;
 import com.zyt.tx.testapplication.SDKCamera.CameraActivity;
+import com.zyt.tx.testapplication.file.FileTestActivity;
 import com.zyt.tx.testapplication.schoolRecord.SchoolCameraActivity;
 import com.zyt.tx.testapplication.schoolRecord.SchoolRecordActivity;
 import com.zyt.tx.testapplication.videoRecord.MediaRecord2Activity;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick({R.id.btn_mediaplayer, R.id.btn_testRunnable, R.id.btnMediaPlayer
             , R.id.btnSchoolCamera, R.id.btnSchoolRecord, R.id.btnSDKCamera, R.id.btnView
-            , R.id.btnProperty})
+            , R.id.btnProperty, R.id.bntFileTest})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_mediaplayer:
@@ -60,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.btnProperty:
                 startActivity(new Intent(this, BasePropertyActivity.class));
+                break;
+
+            case R.id.bntFileTest:
+                startActivity(new Intent(this, FileTestActivity.class));
                 break;
         }
     }
