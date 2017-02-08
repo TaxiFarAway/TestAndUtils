@@ -1,5 +1,6 @@
 package com.zyt.tx.testapplication.uploadBigFile;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,6 +24,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import kr.co.namee.permissiongen.PermissionFail;
+import kr.co.namee.permissiongen.PermissionGen;
+import kr.co.namee.permissiongen.PermissionSuccess;
 
 public class ChooseFileActivity extends AppCompatActivity {
 
@@ -41,7 +45,25 @@ public class ChooseFileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_file);
         ButterKnife.bind(this);
+        initPermission();
         initData();
+    }
+
+    private void initPermission() {
+        PermissionGen.with(this)
+                .permissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .addRequestCode(100)
+                .request();
+    }
+
+    @PermissionSuccess(requestCode = 100)
+    public void onPRSuc() {
+
+    }
+
+    @PermissionFail(requestCode = 100)
+    public void onPRFail() {
+        finish();
     }
 
     private void initData() {
@@ -53,7 +75,6 @@ public class ChooseFileActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     if (files[position].isFile()) {
-                        //TODO
                         String path = files[position].getPath();
                         Log.i("taxi", "当前的file path ： " + path);
                         Intent intent = new Intent();

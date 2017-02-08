@@ -1,5 +1,7 @@
 package com.zyt.tx.testapplication.uploadBigFile;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +26,9 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import kr.co.namee.permissiongen.PermissionFail;
+import kr.co.namee.permissiongen.PermissionGen;
+import kr.co.namee.permissiongen.PermissionSuccess;
 
 public class ChooseFolderActivity extends AppCompatActivity {
     public static final int RESULTCODE = 0x13;
@@ -40,7 +45,26 @@ public class ChooseFolderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_folder);
         ButterKnife.bind(this);
+        initPermission();
         initData();
+    }
+
+    @TargetApi(16)
+    private void initPermission() {
+        PermissionGen.with(this)
+                .addRequestCode(100)
+                .permissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .request();
+    }
+
+    @PermissionSuccess(requestCode = 100)
+    public void onPRSuc() {
+
+    }
+
+    @PermissionFail(requestCode = 100)
+    public void onPRFail() {
+        finish();
     }
 
     private void initData() {
@@ -91,7 +115,7 @@ public class ChooseFolderActivity extends AppCompatActivity {
                             Intent intent = new Intent();
                             Bundle bundle = new Bundle();
                             bundle.putString("current_path", parentFile);
-                            intent.putExtra("bundle", bundle);
+                            intent.putExtras(bundle);
                             setResult(RESULTCODE, intent);
                             finish();
                         }

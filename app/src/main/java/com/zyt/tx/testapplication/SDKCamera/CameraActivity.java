@@ -15,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.SeekBar;
@@ -62,9 +63,14 @@ public class CameraActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        keepScreenOn();
         setContentView(R.layout.activity_camera);
         ButterKnife.bind(this);
         initPermission();
+    }
+
+    private void keepScreenOn() {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
 
@@ -153,14 +159,17 @@ public class CameraActivity extends AppCompatActivity {
         Camera c = null;
         try {
             c = Camera.open();
+
+            Log.d("taxi", "可用的camera的数量=" + Camera.getNumberOfCameras());
+            Toast.makeText(CameraActivity.this, "可用的camera的数量=" + Camera.getNumberOfCameras(), Toast.LENGTH_LONG).show();
             c.setDisplayOrientation(90);
             //调整画面比例
             Camera.Parameters parameters = c.getParameters();
-            if (parameters.isZoomSupported()) {
-                parameters.setZoom(-1);
-                c.setParameters(parameters);
-                //seekBar控制
-            }
+//            if (parameters.isZoomSupported()) {
+//                parameters.setZoom(-1);
+//                c.setParameters(parameters);
+//                //seekBar控制
+//            }
 
             isCameraOpen = true;
         } catch (Exception e) {
@@ -229,7 +238,6 @@ public class CameraActivity extends AppCompatActivity {
             mMediaRecorder.stop();
             releaseMediaRecorder();
             mCamera.lock();
-
             isRecording = false;
             btnCaptureVideo.setText("capture video");
         } else {

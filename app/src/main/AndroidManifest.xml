@@ -36,7 +36,8 @@
         <activity android:name=".file.FileTestActivity" />
         <activity android:name=".uploadBigFile.UploadBigFileActivity" />
         <activity android:name=".uploadBigFile.ChooseFileActivity" />
-        <activity android:name=".uploadBigFile.ChooseFolderActivity"></activity>
+        <activity android:name=".uploadBigFile.ChooseFolderActivity" />
+        <activity android:name=".SDKCamera.ForeAndBackVideoRecordActivity"></activity>
     </application>
 
 </manifest>

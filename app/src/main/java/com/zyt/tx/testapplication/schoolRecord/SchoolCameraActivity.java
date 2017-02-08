@@ -22,13 +22,21 @@ public class SchoolCameraActivity extends AppCompatActivity {
     private SurfaceView mSurfaceView;
     private Camera camera;
     private SurfaceHolder holder;
+    private SurfaceView mForeGroundSurfaceView;
+    private SurfaceHolder foreHolder;
+    private Camera foreCamera;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school_camera);
         mSurfaceView = (SurfaceView) findViewById(R.id.surfaceView);
+        mForeGroundSurfaceView = (SurfaceView) findViewById(R.id.surfaceViewForeground);
         holder = mSurfaceView.getHolder();
+        foreHolder = mForeGroundSurfaceView.getHolder();
+
         initPermission();
     }
 
@@ -38,7 +46,6 @@ public class SchoolCameraActivity extends AppCompatActivity {
 
     @PermissionSuccess(requestCode = 100)
     public void onPermissionSuc() {
-
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
@@ -55,8 +62,46 @@ public class SchoolCameraActivity extends AppCompatActivity {
                 camera.release();
             }
         });
+
+
+        foreHolder.addCallback(new SurfaceHolder.Callback() {
+            @Override
+            public void surfaceCreated(SurfaceHolder holder) {
+                initForeCamera();
+            }
+
+            @Override
+            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+            }
+
+            @Override
+            public void surfaceDestroyed(SurfaceHolder holder) {
+                if (foreCamera != null) {
+                    foreCamera.release();
+                }
+            }
+        });
     }
 
+    private void initForeCamera() {
+        try {
+            foreCamera = Camera.open(1);
+            Camera.Parameters parameters = foreCamera.getParameters();
+            parameters.setJpegQuality(50);
+            parameters.setPictureFormat(ImageFormat.JPEG);
+            parameters.setPictureSize(800, 400);
+
+            parameters.setPreviewFrameRate(24);
+            parameters.setPreviewSize(100, 100);
+            parameters.setZoom(1);
+            foreCamera.setDisplayOrientation(90);
+            foreCamera.setPreviewDisplay(foreHolder);
+            foreCamera.startPreview();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @PermissionFail(requestCode = 100)
     public void onPermissionFail() {
@@ -66,7 +111,7 @@ public class SchoolCameraActivity extends AppCompatActivity {
     private void initCamera() {
         try {
             Toast.makeText(this, "初始化", Toast.LENGTH_SHORT).show();
-            camera = Camera.open();
+            camera = Camera.open(0);
             Camera.Parameters parameters = camera.getParameters();
             System.out.println("参数：" + parameters.flatten());
             parameters.setJpegQuality(100);//图片质量 1~100
@@ -89,6 +134,20 @@ public class SchoolCameraActivity extends AppCompatActivity {
             camera.startPreview();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (camera != null) {
+            camera.release();
+            camera = null;
+        }
+
+        if (foreCamera != null) {
+            foreCamera.release();
+            foreCamera = null;
         }
     }
 }

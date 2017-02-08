@@ -8,9 +8,11 @@ import android.view.View;
 import com.zyt.tx.testapplication.PropertyAnimation.BasePropertyActivity;
 import com.zyt.tx.testapplication.PropertyAnimation.PropertyActivity;
 import com.zyt.tx.testapplication.SDKCamera.CameraActivity;
+import com.zyt.tx.testapplication.SDKCamera.ForeAndBackVideoRecordActivity;
 import com.zyt.tx.testapplication.file.FileTestActivity;
 import com.zyt.tx.testapplication.schoolRecord.SchoolCameraActivity;
 import com.zyt.tx.testapplication.schoolRecord.SchoolRecordActivity;
+import com.zyt.tx.testapplication.uploadBigFile.UploadBigFileActivity;
 import com.zyt.tx.testapplication.videoRecord.MediaRecord2Activity;
 import com.zyt.tx.testapplication.view.ViewActivity;
 
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick({R.id.btn_mediaplayer, R.id.btn_testRunnable, R.id.btnMediaPlayer
             , R.id.btnSchoolCamera, R.id.btnSchoolRecord, R.id.btnSDKCamera, R.id.btnView
-            , R.id.btnProperty, R.id.bntFileTest})
+            , R.id.btnProperty, R.id.bntFileTest, R.id.btnUpload, R.id.btnForeBackRecord})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_mediaplayer:
@@ -65,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.bntFileTest:
                 startActivity(new Intent(this, FileTestActivity.class));
+                break;
+
+            case R.id.btnUpload:
+                startActivity(new Intent(this, UploadBigFileActivity.class));
+                break;
+
+            case R.id.btnForeBackRecord:
+                startActivity(new Intent(this, ForeAndBackVideoRecordActivity.class));
                 break;
         }
     }
