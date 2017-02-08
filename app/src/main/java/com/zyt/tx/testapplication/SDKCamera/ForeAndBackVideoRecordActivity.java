@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.EventListener;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -158,7 +157,6 @@ public class ForeAndBackVideoRecordActivity extends AppCompatActivity {
             foreTime = 0;
             mHandler.removeCallbacks(mForeTimeRunnable);
         }
-
     }
 
     private void releaseMediaRecord() {
@@ -238,7 +236,6 @@ public class ForeAndBackVideoRecordActivity extends AppCompatActivity {
         return false;
     }
 
-
     private String getVideoPath() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyMMdd_HHmmss", Locale.CHINESE);
         String path = Environment.getExternalStorageDirectory().getAbsolutePath()
@@ -246,7 +243,6 @@ public class ForeAndBackVideoRecordActivity extends AppCompatActivity {
         Log.d("taxi", "record path =" + path);
         return path;
     }
-
 
     private String getForeVideoPath() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINESE);
