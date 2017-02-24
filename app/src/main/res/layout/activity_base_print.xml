@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_fore_and_back_video_record"
+    android:id="@+id/activity_base_print"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,38 +9,26 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.zyt.tx.testapplication.SDKCamera.ForeAndBackVideoRecordActivity">
+    tools:context="com.zyt.tx.testapplication.print.BasePrintActivity">
 
 
     <Button
-        android:id="@+id/btnBackCamera"
+        android:id="@+id/btnPrintPicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="后置摄像头录制" />
+        android:text="打印照片" />
 
 
     <Button
-        android:id="@+id/btnForeCamera"
+        android:id="@+id/btnPrintHtml"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="前置摄像头录制" />
-
-
-    <SurfaceView
-        android:id="@+id/surfaceView"
-        android:layout_width="1dp"
-        android:layout_height="1dp" />
-
-
-    <SurfaceView
-        android:id="@+id/foreSurfaceView"
-        android:layout_width="1dp"
-        android:layout_height="1dp" />
-
+        android:text="打印html" />
 
     <Button
-        android:id="@+id/btnFloat"
+        android:id="@+id/btnPrintCustom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="浮动按钮" />
+        android:text="打印自定义" />
+
 </LinearLayout>

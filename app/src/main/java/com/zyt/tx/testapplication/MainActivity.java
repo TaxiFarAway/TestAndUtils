@@ -10,6 +10,7 @@ import com.zyt.tx.testapplication.PropertyAnimation.PropertyActivity;
 import com.zyt.tx.testapplication.SDKCamera.CameraActivity;
 import com.zyt.tx.testapplication.SDKCamera.ForeAndBackVideoRecordActivity;
 import com.zyt.tx.testapplication.file.FileTestActivity;
+import com.zyt.tx.testapplication.floatDraggleButton.BaseFloatDraggleActivity;
 import com.zyt.tx.testapplication.schoolRecord.SchoolCameraActivity;
 import com.zyt.tx.testapplication.schoolRecord.SchoolRecordActivity;
 import com.zyt.tx.testapplication.uploadBigFile.UploadBigFileActivity;
@@ -30,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick({R.id.btn_mediaplayer, R.id.btn_testRunnable, R.id.btnMediaPlayer
             , R.id.btnSchoolCamera, R.id.btnSchoolRecord, R.id.btnSDKCamera, R.id.btnView
-            , R.id.btnProperty, R.id.bntFileTest, R.id.btnUpload, R.id.btnForeBackRecord})
+            , R.id.btnProperty, R.id.bntFileTest, R.id.btnUpload, R.id.btnForeBackRecord
+            , R.id.btnFloat})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_mediaplayer:
@@ -75,6 +77,13 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.btnForeBackRecord:
                 startActivity(new Intent(this, ForeAndBackVideoRecordActivity.class));
+                break;
+            case R.id.btnFloat:
+                startActivity(new Intent(this, BaseFloatDraggleActivity.class));
+                break;
+
+            default:
+
                 break;
         }
     }

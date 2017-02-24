@@ -9,6 +9,9 @@
 
     <uses-feature android:name="android.hardware.camera" />
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="Android.permission.INJECT_EVENTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MediaPlayerTestActivity" />
+        <activity android:name=".MediaPlayerTestActivity"></activity>
         <activity android:name=".RunnableTestActivity" />
         <activity android:name=".videoRecord.MediaRecordActivity" />
         <activity android:name=".videoRecord.MediaRecord2Activity" />
@@ -37,7 +40,15 @@
         <activity android:name=".uploadBigFile.UploadBigFileActivity" />
         <activity android:name=".uploadBigFile.ChooseFileActivity" />
         <activity android:name=".uploadBigFile.ChooseFolderActivity" />
-        <activity android:name=".SDKCamera.ForeAndBackVideoRecordActivity"></activity>
+        <activity android:name=".SDKCamera.ForeAndBackVideoRecordActivity" />
+        <activity android:name=".rxjava.BaseRxJavaActivity" />
+        <activity android:name=".floatDraggleButton.floatDraggetButton1.FloatVActivity" />
+        <activity android:name=".floatDraggleButton.BaseFloatDraggleActivity" />
+        <activity android:name=".print.BasePrintActivity" />
+        <activity
+            android:name=".print.PrintPictureActivity"
+            android:exported="true" />
+        <activity android:name=".print.PrintCustomActivity"></activity>
     </application>
 
 </manifest>

@@ -85,5 +85,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="前后双录" />
+
+        <Button
+            android:id="@+id/btnFloat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="悬浮拖动按钮" />
     </LinearLayout>
 </ScrollView>

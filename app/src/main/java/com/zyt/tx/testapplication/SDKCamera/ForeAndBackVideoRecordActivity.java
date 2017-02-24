@@ -1,6 +1,7 @@
 package com.zyt.tx.testapplication.SDKCamera;
 
 import android.Manifest;
+import android.content.Intent;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.zyt.tx.testapplication.R;
+import com.zyt.tx.testapplication.floatDraggleButton.BaseFloatDraggleActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -101,7 +103,7 @@ public class ForeAndBackVideoRecordActivity extends AppCompatActivity {
         finish();
     }
 
-    @OnClick({R.id.btnBackCamera, R.id.btnForeCamera})
+    @OnClick({R.id.btnBackCamera, R.id.btnForeCamera, R.id.btnFloat})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnBackCamera:
@@ -141,6 +143,10 @@ public class ForeAndBackVideoRecordActivity extends AppCompatActivity {
                         releaseForeRecord();
                     }
                 }
+                break;
+
+            case R.id.btnFloat:
+                startActivity(new Intent(this, BaseFloatDraggleActivity.class));
                 break;
         }
     }
