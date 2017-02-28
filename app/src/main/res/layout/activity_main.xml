@@ -91,5 +91,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="悬浮拖动按钮" />
+
+        <Button
+            android:id="@+id/btnWebView"
+            android:text="WebView测试"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </ScrollView>

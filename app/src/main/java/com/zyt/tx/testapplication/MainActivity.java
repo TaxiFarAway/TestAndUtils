@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.zyt.tx.testapplication.PropertyAnimation.BasePropertyActivity;
-import com.zyt.tx.testapplication.PropertyAnimation.PropertyActivity;
 import com.zyt.tx.testapplication.SDKCamera.CameraActivity;
 import com.zyt.tx.testapplication.SDKCamera.ForeAndBackVideoRecordActivity;
 import com.zyt.tx.testapplication.file.FileTestActivity;
@@ -16,6 +15,7 @@ import com.zyt.tx.testapplication.schoolRecord.SchoolRecordActivity;
 import com.zyt.tx.testapplication.uploadBigFile.UploadBigFileActivity;
 import com.zyt.tx.testapplication.videoRecord.MediaRecord2Activity;
 import com.zyt.tx.testapplication.view.ViewActivity;
+import com.zyt.tx.testapplication.webview.BaseWebViewActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick({R.id.btn_mediaplayer, R.id.btn_testRunnable, R.id.btnMediaPlayer
             , R.id.btnSchoolCamera, R.id.btnSchoolRecord, R.id.btnSDKCamera, R.id.btnView
             , R.id.btnProperty, R.id.bntFileTest, R.id.btnUpload, R.id.btnForeBackRecord
-            , R.id.btnFloat})
+            , R.id.btnFloat,R.id.btnWebView})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_mediaplayer:
@@ -80,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btnFloat:
                 startActivity(new Intent(this, BaseFloatDraggleActivity.class));
+                break;
+
+            case R.id.btnWebView:
+                startActivity(new Intent(this, BaseWebViewActivity.class));
                 break;
 
             default:

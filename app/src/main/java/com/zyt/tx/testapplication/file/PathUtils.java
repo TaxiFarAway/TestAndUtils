@@ -77,7 +77,6 @@ public class PathUtils {
     }
 
     private static String getRootFilePath(Context context) {
-
         /*replaced by Environment*/
         StorageManager storageManager = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
         try {

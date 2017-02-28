@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_test_property_animation"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zyt.tx.testapplication.PropertyAnimation.TestPropertyAnimationActivity">
+
+    <ImageView
+        android:id="@+id/ivContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/ivContent1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivContent"
+        android:layout_marginTop="20dp"
+        android:src="@mipmap/ic_launcher" />
+
+
+    <Button
+        android:id="@+id/btnMove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="move" />
+
+</RelativeLayout>

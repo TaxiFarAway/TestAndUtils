@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_web_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zyt.tx.testapplication.webview.WebViewActivity">
+
+    <WebView
+        android:id="@+id/webview_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarSize="3dp"
+        android:scrollbarThumbVertical="@color/colorAccent" />
+
+    <!--?android:attr/progressBarStyleHorizontal与?android:progressBarStyleHorizontal的区别-->
+    <ProgressBar
+        android:id="@+id/pb_progress"
+        style="android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_alignParentTop="true"
+        android:max="1000"
+        android:progress="0"
+        android:progressDrawable="@drawable/process_bg"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

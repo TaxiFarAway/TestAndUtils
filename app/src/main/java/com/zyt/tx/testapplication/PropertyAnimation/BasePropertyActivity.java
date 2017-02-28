@@ -19,7 +19,7 @@ public class BasePropertyActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.btnPropertyOne, R.id.btnPropertyTwo})
+    @OnClick({R.id.btnPropertyOne, R.id.btnPropertyTwo, R.id.btnMyPropertyAnimation})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnPropertyOne:
@@ -27,6 +27,9 @@ public class BasePropertyActivity extends AppCompatActivity {
                 break;
             case R.id.btnPropertyTwo:
                 startActivity(new Intent(this, PropertyMixActivity.class));
+                break;
+            case R.id.btnMyPropertyAnimation:
+                startActivity(new Intent(this, TestPropertyAnimationActivity.class));
                 break;
         }
     }
