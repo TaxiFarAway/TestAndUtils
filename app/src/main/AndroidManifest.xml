@@ -12,6 +12,8 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="Android.permission.INJECT_EVENTS" />
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MediaPlayerTestActivity"></activity>
+        <activity android:name=".MediaPlayerTestActivity" />
         <activity android:name=".RunnableTestActivity" />
         <activity android:name=".videoRecord.MediaRecordActivity" />
         <activity android:name=".videoRecord.MediaRecord2Activity" />
@@ -48,7 +50,8 @@
         <activity
             android:name=".print.PrintPictureActivity"
             android:exported="true" />
-        <activity android:name=".print.PrintCustomActivity"></activity>
+        <activity android:name=".print.PrintCustomActivity" />
+        <activity android:name=".TempWebViewActivity" android:exported="true"></activity>
     </application>
 
 </manifest>
