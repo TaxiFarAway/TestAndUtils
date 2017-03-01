@@ -36,7 +36,6 @@ public class TempWebViewActivity extends AppCompatActivity {
         settings.setJavaScriptEnabled(true);
         settings.setBuiltInZoomControls(true);
         webView.loadUrl("http://www.zhangyoobao.cn/merchant/account/login;jsessionid=9E71E1910787444E6E7B1962AB0655C1");
-
     }
 
     final class InJavaScriptLocalObj{
