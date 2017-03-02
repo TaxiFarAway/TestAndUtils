@@ -3,6 +3,7 @@ package com.zyt.tx.testapplication.webview;
 import android.content.pm.ActivityInfo;
 import android.view.View;
 import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 
 import com.zyt.tx.testapplication.webview.presenter.IWebPageView;
 
@@ -31,22 +32,37 @@ public class MyWebChromeClient extends WebChromeClient {
     @Override
     public void onShowCustomView(View view, CustomViewCallback callback) {
         mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        mIwebPageView.hideWebView();
+//        mIwebPageView.hideWebView();
         /*如果一个视图已经存在，那么立刻终止并新建一个*/
-        if (mXCustomView != null) {
-            callback.onCustomViewHidden();
-            return;
-        }
-        mActivity.fullViewAddView(view);
-        mXCustomView = view;
-        mXCustomViewCallBack = callback;
-        mIwebPageView.showVideoFullView();
+//        if (mXCustomView != null) {
+//            callback.onCustomViewHidden();
+//            return;
+//        }
+//        mActivity.fullViewAddView(view);
+//        mXCustomView = view;
+//        mXCustomViewCallBack = callback;
+//        mIwebPageView.showVideoFullView();
     }
-/*视频播放退出全屏调用
-*通知主机应用程序当前页面已退出全屏模式。
-* */
+
+    /*视频播放退出全屏调用
+    *通知主机应用程序当前页面已退出全屏模式。
+    * */
     @Override
     public void onHideCustomView() {
         super.onHideCustomView();
+
+//        mIwebPageView.showWebView();
+    }
+
+    @Override
+    public void onProgressChanged(WebView view, int newProgress) {
+        super.onProgressChanged(view, newProgress);
+        mIwebPageView.progressChanged(newProgress);
+    }
+
+    @Override
+    public void onReceivedTitle(WebView view, String title) {
+        super.onReceivedTitle(view, title);
+        mActivity.setTitle(title);
     }
 }

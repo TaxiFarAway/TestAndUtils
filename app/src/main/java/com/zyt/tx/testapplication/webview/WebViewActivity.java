@@ -12,6 +12,8 @@ import android.widget.ProgressBar;
 
 import com.zyt.tx.testapplication.R;
 import com.zyt.tx.testapplication.webview.presenter.IWebPageView;
+import com.zyt.tx.testapplication.webview.presenter.ImageClickInterface;
+import com.zyt.tx.testapplication.webview.presenter.MyWebViewClient;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +31,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
     public boolean mProgress90 = false;
 
     public boolean mPageFinish;
+    private MyWebChromeClient myWebChromeClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +85,12 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         ws.setTextZoom(100);
 
 
+        myWebChromeClient = new MyWebChromeClient(this);
+        webView.setWebChromeClient(myWebChromeClient);
 
+        //与js交互
+        webView.addJavascriptInterface(new ImageClickInterface(this),"injectedObject");
+        webView.setWebViewClient(new MyWebViewClient(this));
     }
 
     private void getIntentData() {
@@ -177,6 +185,27 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
     @Override
     public void addImageClickListener() {
         //TODO 待续
+        // 这段js函数的功能就是，遍历所有的img节点，并添加onclick函数，函数的功能是在图片点击的时候调用本地java接口并传递url过去
+        // 如要点击一张图片在弹出的页面查看所有的图片集合,则获取的值应该是个图片数组
+        webView.loadUrl("javascript:(function(){" +
+                "var objs = document.getElementsByTagName(\"img\");" +
+                "for(var i=0;i<objs.length;i++)" +
+                "{" +
+                //  "objs[i].onclick=function(){alert(this.getAttribute(\"has_link\"));}" +
+                "objs[i].onclick=function(){window.injectedObject.imageClick(this.getAttribute(\"src\"),this.getAttribute(\"has_link\"));}" +
+                "}" +
+                "})()");
+
+        // 遍历所有的a节点,将节点里的属性传递过去(属性自定义,用于页面跳转)
+        webView.loadUrl("javascript:(function(){" +
+                "var objs =document.getElementsByTagName(\"a\");" +
+                "for(var i=0;i<objs.length;i++)" +
+                "{" +
+                "objs[i].onclick=function(){" +
+                "window.injectedObject.textClick(this.getAttribute(\"type\"),this.getAttribute(\"item_pk\"));}" +
+                "}" +
+                "})()");
+
     }
 
     @Override

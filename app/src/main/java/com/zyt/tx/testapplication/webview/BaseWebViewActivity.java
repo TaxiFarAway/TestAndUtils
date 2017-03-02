@@ -24,7 +24,7 @@ public class BaseWebViewActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn1:
-                String baiduUrl = "www.baidu.com";
+                String baiduUrl = "http://www.baidu.com";
                 WebViewActivity.loadUrl(this,baiduUrl,false);
                 break;
             case R.id.btn2:

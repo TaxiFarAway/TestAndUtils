@@ -11,8 +11,8 @@
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="Android.permission.INJECT_EVENTS" />
-
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -47,11 +47,17 @@
         <activity android:name=".floatDraggleButton.floatDraggetButton1.FloatVActivity" />
         <activity android:name=".floatDraggleButton.BaseFloatDraggleActivity" />
         <activity android:name=".print.BasePrintActivity" />
+        <activity android:name=".webview.BaseWebViewActivity" />
+        <activity android:name=".webview.WebViewActivity"/>
         <activity
             android:name=".print.PrintPictureActivity"
             android:exported="true" />
         <activity android:name=".print.PrintCustomActivity" />
-        <activity android:name=".TempWebViewActivity" android:exported="true"></activity>
+        <activity
+            android:name=".TempWebViewActivity"
+            android:exported="true" />
+        <activity android:name=".okhttp.BaseOkHttpActivity" />
+        <activity android:name=".okhttp.BreakPointDownloadActivity"></activity>
     </application>
 
 </manifest>
