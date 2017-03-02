@@ -12,7 +12,6 @@ import com.zyt.tx.testapplication.webview.presenter.IWebPageView;
 
 public class MyWebChromeClient extends WebChromeClient {
 
-
     private final IWebPageView mIwebPageView;
     private final WebViewActivity mActivity;
 
@@ -24,7 +23,10 @@ public class MyWebChromeClient extends WebChromeClient {
         this.mActivity = (WebViewActivity) iWebPageView;
     }
 
-    /*播放网络视频时全屏会被调用的方法*/
+    /*播放网络视频时全屏会被调用的方法
+    * 通知主机应用程序当前页面已进入全屏模式。
+    * 主机应用程序必须以全屏模式显示包含Web内容（视频或其他HTML内容）的自定义视图。
+    * */
 
     @Override
     public void onShowCustomView(View view, CustomViewCallback callback) {
@@ -39,5 +41,12 @@ public class MyWebChromeClient extends WebChromeClient {
         mXCustomView = view;
         mXCustomViewCallBack = callback;
         mIwebPageView.showVideoFullView();
+    }
+/*视频播放退出全屏调用
+*通知主机应用程序当前页面已退出全屏模式。
+* */
+    @Override
+    public void onHideCustomView() {
+        super.onHideCustomView();
     }
 }
